@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ChatMessageComponent,
   MyMessageComponent,
+  TextMessageBoxComponent,
   TypingLoaderComponent,
 } from '@components/index';
 
@@ -15,6 +16,7 @@ import {
     ChatMessageComponent,
     MyMessageComponent,
     TypingLoaderComponent,
+    TextMessageBoxComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
