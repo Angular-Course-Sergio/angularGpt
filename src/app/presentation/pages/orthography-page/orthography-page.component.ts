@@ -20,4 +20,8 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class OrthographyPageComponent {}
+export default class OrthographyPageComponent {
+  handleMessage(prompt: string) {
+    console.log(prompt);
+  }
+}
