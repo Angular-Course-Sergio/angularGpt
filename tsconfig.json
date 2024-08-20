@@ -6,7 +6,9 @@
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["app/presentation/components/*"],
-      "@interfaces/*": ["app/interfaces/*"]
+      "@interfaces/*": ["app/interfaces/*"],
+      "@services/*": ["app/presentation/services/*"],
+      "@use-cases/*": ["app/core/use-cases/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
