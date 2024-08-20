@@ -4,8 +4,10 @@ import {
   ChatMessageComponent,
   MyMessageComponent,
   TextMessageBoxComponent,
+  TextMessageBoxFileComponent,
   TypingLoaderComponent,
 } from '@components/index';
+import { TextMessageEvent } from '@interfaces/text-message-event.interface';
 
 @Component({
   selector: 'app-orthography-page',
@@ -17,11 +19,16 @@ import {
     MyMessageComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
+    TextMessageBoxFileComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class OrthographyPageComponent {
   handleMessage(prompt: string) {
     console.log(prompt);
+  }
+
+  handleMessageWithFile(event: TextMessageEvent) {
+    console.log(event);
   }
 }

@@ -3,8 +3,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["./src/app/presentation/components/*"]
+      "@components/*": ["app/presentation/components/*"],
+      "@interfaces/*": ["app/interfaces/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
