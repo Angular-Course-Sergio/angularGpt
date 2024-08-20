@@ -5,9 +5,10 @@ import {
   MyMessageComponent,
   TextMessageBoxComponent,
   TextMessageBoxFileComponent,
+  TextMessageBoxSelectComponent,
   TypingLoaderComponent,
 } from '@components/index';
-import { TextMessageEvent } from '@interfaces/text-message-event.interface';
+import { TextMessageBoxEvent, TextMessageEvent } from '@interfaces/index';
 
 @Component({
   selector: 'app-orthography-page',
@@ -20,6 +21,7 @@ import { TextMessageEvent } from '@interfaces/text-message-event.interface';
     TypingLoaderComponent,
     TextMessageBoxComponent,
     TextMessageBoxFileComponent,
+    TextMessageBoxSelectComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -29,6 +31,10 @@ export default class OrthographyPageComponent {
   }
 
   handleMessageWithFile(event: TextMessageEvent) {
+    console.log(event);
+  }
+
+  handleMessageWithSelect(event: TextMessageBoxEvent) {
     console.log(event);
   }
 }

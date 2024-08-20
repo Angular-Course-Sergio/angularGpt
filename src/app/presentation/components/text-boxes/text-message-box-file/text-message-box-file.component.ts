@@ -28,7 +28,6 @@ export class TextMessageBoxFileComponent {
   public file: File | undefined;
 
   @Input() placeholder: string = '';
-  @Input() disableCorrections: boolean = false;
 
   @Output() onMessage = new EventEmitter<TextMessageEvent>();
 
