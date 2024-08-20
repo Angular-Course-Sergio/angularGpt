@@ -1,9 +1,17 @@
 <div class="chat-container">
   <div class="chat-messages">
     <div class="grid gap-y-2">
-      <app-chat-message text="Escribe el texto que quieres que revise." />
-      <app-my-message message="Hola mundo" />
-      <app-typing-loader />
+      @for (message of messages(); track $index) {
+        @if(message.isGpt) {
+          <app-chat-message [text]="message.text" />
+        } @else {
+          <app-my-message [message]="message.text" />
+        }
+      }
+
+      @if (isLoading()) {
+        <app-typing-loader />
+      }
     </div>
   </div>
 
@@ -20,10 +28,8 @@
   <app-text-message-box-select
     placeholder="Escribe aquí lo que deseas"
     [options]="[
-      { id: '1', text: '1' },
-      { id: '2', text: '2' },
-      { id: '3', text: '3' },
-      { id: '4', text: '4' }
+      { id: '1', text: 'U' },
+      { id: '2', text: 'D' }
     ]"
     (onMessage)="handleMessageWithSelect($event)"
   />
