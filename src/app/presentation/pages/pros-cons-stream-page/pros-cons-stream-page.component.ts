@@ -33,7 +33,21 @@ export default class ProsConsStreamPageComponent {
   public messages = signal<Message[]>([]);
   public isLoading = signal(false);
 
-  handleMessage(prompt: string) {
-    this.openAiService.prosConsDiscusserStream(prompt);
+  async handleMessage(prompt: string) {
+    this.isLoading.set(true);
+
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: false,
+        text: prompt,
+      },
+    ]);
+
+    const stream = this.openAiService.prosConsDiscusserStream(prompt);
+    this.isLoading.set(false);
+    for await (const text of stream) {
+      console.log(text);
+    }
   }
 }
