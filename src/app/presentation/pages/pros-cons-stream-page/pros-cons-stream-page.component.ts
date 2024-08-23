@@ -32,9 +32,13 @@ export default class ProsConsStreamPageComponent {
 
   public messages = signal<Message[]>([]);
   public isLoading = signal(false);
+  public abortSignal = new AbortController();
 
   async handleMessage(prompt: string) {
     this.isLoading.set(true);
+
+    this.abortSignal.abort();
+    this.abortSignal = new AbortController();
 
     this.messages.update((prev) => [
       ...prev,
@@ -48,7 +52,10 @@ export default class ProsConsStreamPageComponent {
       },
     ]);
 
-    const stream = this.openAiService.prosConsDiscusserStream(prompt);
+    const stream = this.openAiService.prosConsDiscusserStream(
+      prompt,
+      this.abortSignal.signal
+    );
     this.isLoading.set(false);
     for await (const text of stream) {
       this.handleStreamResponse(text);

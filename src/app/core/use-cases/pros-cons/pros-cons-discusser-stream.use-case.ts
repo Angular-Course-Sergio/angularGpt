@@ -1,6 +1,9 @@
 import { environment } from 'environments/environment';
 
-export async function* prosConsDiscusserStreamUseCase(prompt: string) {
+export async function* prosConsDiscusserStreamUseCase(
+  prompt: string,
+  abortSignal: AbortSignal
+) {
   try {
     const resp = await fetch(
       `${environment.backendUri}/pros-cons-discusser-stream`,
@@ -10,6 +13,7 @@ export async function* prosConsDiscusserStreamUseCase(prompt: string) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ prompt }),
+        signal: abortSignal,
       }
     );
 
