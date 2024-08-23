@@ -1,7 +1,7 @@
 import { ProsConsResponse } from '@interfaces/index';
 import { environment } from 'environments/environment.development';
 
-export const prosConsDiscusser = async (prompt: string) => {
+export const prosConsDiscusserUseCase = async (prompt: string) => {
   try {
     const resp = await fetch(`${environment.backendUri}/pros-cons-discusser`, {
       method: 'POST',
@@ -15,19 +15,16 @@ export const prosConsDiscusser = async (prompt: string) => {
 
     const data = (await resp.json()) as ProsConsResponse;
 
-    return  {
+    return {
       ok: true,
-      ...data
-    }
-
-
-
+      ...data,
+    };
   } catch (error) {
     console.log(error);
     return {
       ok: false,
-      role: 'assistant',
-      content: 'No se pudo realizar la comparación'
-    }
+      role: '',
+      content: 'No se pudo realizar la comparación',
+    };
   }
 };
