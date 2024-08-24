@@ -3,6 +3,7 @@ import {
   orthographyUseCase,
   prosConsDiscusserStreamUseCase,
   prosConsDiscusserUseCase,
+  translateTextUseCase
 } from '@use-cases/index';
 import { from } from 'rxjs';
 
@@ -20,5 +21,9 @@ export class OpenAIService {
 
   prosConsDiscusserStream(prompt: string, abortSignal: AbortSignal) {
     return prosConsDiscusserStreamUseCase(prompt, abortSignal);
+  }
+
+  translateText(prompt: string, lang: string) {
+    return from(translateTextUseCase(prompt, lang));
   }
 }

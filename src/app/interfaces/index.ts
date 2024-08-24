@@ -5,3 +5,4 @@ export * from './text-message-event.interface';
 
 export * from './use-cases/orthography-response.interface';
 export * from './use-cases/pros-cons-response.interface';
+export * from './use-cases/translate-response.interface';
