@@ -43,5 +43,28 @@ export default class TextToAudioPageComponent {
     { id: 'shimmer', text: 'Shimmer' },
   ]);
 
-  handleMessageWithSelect(event: TextMessageBoxEvent) {}
+  handleMessageWithSelect(event: TextMessageBoxEvent) {
+    this.isLoading.set(true);
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: false,
+        text: `${event.selectedOption} - ${event.prompt}`,
+      },
+    ]);
+
+    this.openAiService
+      .textToAudio(event.prompt, event.selectedOption)
+      .subscribe((resp) => {
+        this.isLoading.set(false);
+        this.messages.update((prev) => [
+          ...prev,
+          {
+            isGpt: true,
+            text: resp.message,
+            audioUrl: resp.audioUrl,
+          },
+        ]);
+      });
+  }
 }
