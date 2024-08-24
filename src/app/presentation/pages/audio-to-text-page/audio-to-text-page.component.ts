@@ -5,7 +5,11 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { Message, TextMessageEvent } from '@interfaces/index';
+import {
+  AudioToTextResponse,
+  Message,
+  TextMessageEvent,
+} from '@interfaces/index';
 import {
   ChatMessageComponent,
   MyMessageComponent,
@@ -34,6 +38,53 @@ export default class AudioToTextPageComponent {
   public isLoading = signal(false);
 
   handleMessageWithFile(event: TextMessageEvent) {
-    console.log(event);
+    const text = `Transcribe el audio: ${event.file.name}`;
+
+    this.isLoading.set(true);
+
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: false,
+        text: text,
+      },
+    ]);
+
+    this.openAiService
+      .audioToText(event.file, text)
+      .subscribe((resp) => this.handleResponse(resp));
+  }
+
+  handleResponse(resp: AudioToTextResponse | null) {
+    this.isLoading.set(false);
+    if (!resp) return;
+
+    const text = `## Transcripción:
+__Duración:__ ${Math.round(resp.duration)} segundos.
+## El texto es:
+${resp.text}`;
+
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: true,
+        text: text,
+      },
+    ]);
+
+    for (const segment of resp.segments) {
+      const segmentText = `
+__De ${Math.round(segment.start)} a ${Math.round(segment.end)} segundos.__
+${segment.text}
+`;
+
+      this.messages.update((prev) => [
+        ...prev,
+        {
+          isGpt: true,
+          text: segmentText,
+        },
+      ]);
+    }
   }
 }
