@@ -1,4 +1,3 @@
-import type { OrthographyResponse } from '@interfaces/index';
 import { environment } from 'environments/environment.development';
 
 export const textToAudioUseCase = async (prompt: string, voice: string) => {

@@ -5,6 +5,7 @@ import {
   prosConsDiscusserUseCase,
   translateTextUseCase,
   textToAudioUseCase,
+  audioToTextUseCase,
 } from '@use-cases/index';
 import { from } from 'rxjs';
 
@@ -30,5 +31,8 @@ export class OpenAIService {
 
   textToAudio(prompt: string, voice: string) {
     return from(textToAudioUseCase(prompt, voice));
+  }
+  audioToText(file: File, prompt?: string) {
+    return from(audioToTextUseCase(file, prompt));
   }
 }
