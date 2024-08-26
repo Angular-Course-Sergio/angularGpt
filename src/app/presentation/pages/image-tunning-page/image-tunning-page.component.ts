@@ -32,18 +32,10 @@ import { OpenAIService } from '@services/openai.service';
 export default class ImageTunningPageComponent {
   public openAiService = inject(OpenAIService);
 
-  public messages = signal<Message[]>([
-    {
-      isGpt: true,
-      text: '',
-      imageInfo: {
-        alt: 'Dummy image',
-        url: 'http://localhost:3000/api/gpt/image-generation/1724703230665.png',
-      },
-    },
-  ]);
+  public messages = signal<Message[]>([]);
   public isLoading = signal(false);
   public originalImage = signal<string | undefined>(undefined);
+  public maskImage = signal<string | undefined>(undefined);
 
   handleMessage(prompt: string) {
     this.isLoading.set(true);
@@ -55,26 +47,29 @@ export default class ImageTunningPageComponent {
       },
     ]);
 
-    this.openAiService.imageGeneration(prompt).subscribe((resp) => {
-      if (!resp) return;
+    this.openAiService
+      .imageGeneration(prompt, this.originalImage(), this.maskImage())
+      .subscribe((resp) => {
+        if (!resp) return;
 
-      this.isLoading.set(false);
-      this.messages.update((prev) => [
-        ...prev,
-        {
-          isGpt: true,
-          text: resp.revised_prompt,
-          imageInfo: {
-            url: resp.url,
-            alt: resp.revised_prompt,
+        this.isLoading.set(false);
+        this.messages.update((prev) => [
+          ...prev,
+          {
+            isGpt: true,
+            text: resp.revised_prompt,
+            imageInfo: {
+              url: resp.url,
+              alt: resp.revised_prompt,
+            },
           },
-        },
-      ]);
-    });
+        ]);
+      });
   }
 
   handleImageChange(newImage: string, originalImage: string) {
     this.originalImage.set(originalImage);
+    this.maskImage.set(newImage);
   }
 
   generateVariation() {
