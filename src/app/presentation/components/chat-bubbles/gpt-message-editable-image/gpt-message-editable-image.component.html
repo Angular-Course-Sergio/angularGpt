@@ -18,7 +18,15 @@
         (click)="handleClick()"
       /> -->
 
-      <canvas width="1024" height="1024" #canvas> </canvas>
+      <canvas
+        width="1024"
+        height="1024"
+        #canvas
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp()"
+      >
+      </canvas>
     </div>
   </div>
 </div>
