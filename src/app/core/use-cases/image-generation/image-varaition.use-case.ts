@@ -10,7 +10,7 @@ export const imageVariatonUseCase = async (
     const resp = await fetch(`${environment.backendUri}/image-variation`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ originalImage }),
+      body: JSON.stringify({ baseImage: originalImage }),
     });
 
     const data = await resp.json();

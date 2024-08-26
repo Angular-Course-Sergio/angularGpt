@@ -7,6 +7,7 @@ import {
   textToAudioUseCase,
   audioToTextUseCase,
   imageGenerationUseCase,
+  imageVariatonUseCase,
 } from '@use-cases/index';
 import { from } from 'rxjs';
 
@@ -40,5 +41,9 @@ export class OpenAIService {
 
   imageGeneration(prompt: string, originalImage?: string, maskImage?: string) {
     return from(imageGenerationUseCase(prompt, originalImage, maskImage));
+  }
+
+  imageVariation(originalImage: string) {
+    return from(imageVariatonUseCase(originalImage));
   }
 }
