@@ -7,3 +7,4 @@ export * from './use-cases/orthography-response.interface';
 export * from './use-cases/pros-cons-response.interface';
 export * from './use-cases/translate-response.interface';
 export * from './use-cases/audio-to-text-response.interface';
+export * from './use-cases/image-generation-response';
