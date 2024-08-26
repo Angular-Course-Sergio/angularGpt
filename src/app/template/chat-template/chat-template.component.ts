@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import {
   ChatMessageComponent,
   MyMessageComponent,
@@ -19,7 +18,6 @@ import { TextMessageBoxComponent } from "../../presentation/components/text-boxe
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     ChatMessageComponent,
     MyMessageComponent,
     TypingLoaderComponent,
