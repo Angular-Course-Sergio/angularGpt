@@ -4,7 +4,7 @@
       <app-chat-message text="Escribe la descripción del dibujo" />
 
       @for (message of messages(); track $index) { @if(message.isGpt) {
-      <app-chat-message [text]="message.text" />
+      <app-chat-message [text]="message.text" [imageInfo]="message.imageInfo" />
       } @else {
       <app-my-message [message]="message.text" />
       } } @if (isLoading()) {

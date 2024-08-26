@@ -34,8 +34,30 @@ export default class ImageGenerationPageComponent {
   public isLoading = signal(false);
 
   handleMessage(prompt: string) {
-    console.log(prompt);
+    this.isLoading.set(true);
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: false,
+        text: prompt,
+      },
+    ]);
+
+    this.openAiService.imageGeneration(prompt).subscribe((resp) => {
+      if (!resp) return;
+
+      this.isLoading.set(false);
+      this.messages.update((prev) => [
+        ...prev,
+        {
+          isGpt: true,
+          text: resp.revised_prompt,
+          imageInfo: {
+            url: resp.url,
+            alt: resp.revised_prompt,
+          },
+        },
+      ]);
+    });
   }
-
-
 }
