@@ -10,6 +10,7 @@ import {
   MyMessageComponent,
   TypingLoaderComponent,
   TextMessageBoxComponent,
+  GptMessageEditableImageComponent,
 } from '@components/index';
 import { Message } from '@interfaces/message.interface';
 import { OpenAIService } from '@services/openai.service';
@@ -24,6 +25,7 @@ import { OpenAIService } from '@services/openai.service';
     MyMessageComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
+    GptMessageEditableImageComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -62,7 +64,9 @@ export default class ImageTunningPageComponent {
     });
   }
 
-  generateVariation() {
-
+  handleImageChange(newImage: string, originalImage: string) {
+    this.originalImage.set(originalImage);
   }
+
+  generateVariation() {}
 }
