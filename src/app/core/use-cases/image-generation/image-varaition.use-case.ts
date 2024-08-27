@@ -7,7 +7,7 @@ export const imageVariatonUseCase = async (
   originalImage: string
 ): Promise<GeneratedImage> => {
   try {
-    const resp = await fetch(`${environment.backendUri}/image-variation`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/image-variation`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ baseImage: originalImage }),

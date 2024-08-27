@@ -7,7 +7,7 @@ export const audioToTextUseCase = async (audioFile: File, prompt?: string) => {
     formData.append('file', audioFile);
     if (prompt) formData.append('prompt', prompt);
 
-    const resp = await fetch(`${environment.backendUri}/audio-to-text`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/audio-to-text`, {
       method: 'POST',
       body: formData,
     });

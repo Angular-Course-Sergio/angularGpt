@@ -9,7 +9,7 @@ export const imageGenerationUseCase = async (
   maskImage?: string
 ): Promise<GeneratedImage> => {
   try {
-    const resp = await fetch(`${environment.backendUri}/image-generation`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/image-generation`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ prompt, originalImage, maskImage }),

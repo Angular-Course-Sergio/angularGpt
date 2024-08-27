@@ -2,7 +2,7 @@ import { environment } from 'environments/environment.development';
 
 export const textToAudioUseCase = async (prompt: string, voice: string) => {
   try {
-    const resp = await fetch(`${environment.backendUri}/text-to-audio`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/text-to-audio`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

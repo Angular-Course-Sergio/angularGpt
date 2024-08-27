@@ -3,7 +3,7 @@ import { environment } from 'environments/environment.development';
 
 export const prosConsDiscusserUseCase = async (prompt: string) => {
   try {
-    const resp = await fetch(`${environment.backendUri}/pros-cons-discusser`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/pros-cons-discusser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

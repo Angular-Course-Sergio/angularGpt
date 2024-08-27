@@ -10,3 +10,6 @@ export * from './audios/audio-to-text.use-case';
 
 export * from './image-generation/image-generation.use-case';
 export * from './image-generation/image-varaition.use-case';
+
+export * from './assistant/create-thread.use-case';
+export * from './assistant/user-question.use-case';

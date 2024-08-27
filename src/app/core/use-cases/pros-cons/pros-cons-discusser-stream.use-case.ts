@@ -6,7 +6,7 @@ export async function* prosConsDiscusserStreamUseCase(
 ) {
   try {
     const resp = await fetch(
-      `${environment.backendUri}/pros-cons-discusser-stream`,
+      `${environment.backendUri}/gpt/pros-cons-discusser-stream`,
       {
         method: 'POST',
         headers: {

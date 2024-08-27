@@ -3,7 +3,7 @@ import { environment } from 'environments/environment.development';
 
 export const orthographyUseCase = async (prompt: string) => {
   try {
-    const resp = await fetch(`${environment.backendUri}/orthography-check`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/orthography-check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { environment } from 'environments/environment.development';
 
 export const translateTextUseCase = async (prompt: string, lang: string) => {
   try {
-    const resp = await fetch(`${environment.backendUri}/translate`, {
+    const resp = await fetch(`${environment.backendUri}/gpt/translate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
