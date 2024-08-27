@@ -8,8 +8,9 @@ import {
   audioToTextUseCase,
   imageGenerationUseCase,
   imageVariatonUseCase,
+  createThreadUseCase,
 } from '@use-cases/index';
-import { from } from 'rxjs';
+import { from, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +46,16 @@ export class OpenAIService {
 
   imageVariation(originalImage: string) {
     return from(imageVariatonUseCase(originalImage));
+  }
+
+  createThread(): Observable<string> {
+    if (localStorage.getItem('thread'))
+      return of(localStorage.getItem('thread')!);
+
+    return from(createThreadUseCase()).pipe(
+      tap((thread) => {
+        localStorage.setItem('thread', thread);
+      })
+    );
   }
 }

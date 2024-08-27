@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  OnInit,
   signal,
 } from '@angular/core';
 import {
@@ -27,11 +28,19 @@ import { OpenAIService } from '@services/openai.service';
   templateUrl: './assistant-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AssistantPageComponent {
+export default class AssistantPageComponent implements OnInit {
   public openAiService = inject(OpenAIService);
 
   public messages = signal<Message[]>([]);
   public isLoading = signal(false);
+
+  public threadId = signal<string | undefined>(undefined);
+
+  ngOnInit(): void {
+    this.openAiService.createThread().subscribe((id) => {
+      this.threadId.set(id);
+    });
+  }
 
   handleMessage(prompt: string) {
     console.log(prompt);
