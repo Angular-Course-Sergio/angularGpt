@@ -9,6 +9,7 @@ import {
   imageGenerationUseCase,
   imageVariatonUseCase,
   createThreadUseCase,
+  userQuestionUseCase,
 } from '@use-cases/index';
 import { from, Observable, of, tap } from 'rxjs';
 
@@ -57,5 +58,9 @@ export class OpenAIService {
         localStorage.setItem('thread', thread);
       })
     );
+  }
+
+  postQuestion(threadId: string, question: string) {
+    return from(userQuestionUseCase(threadId, question));
   }
 }
